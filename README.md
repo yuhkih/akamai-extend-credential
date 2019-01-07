@@ -1,7 +1,7 @@
 # Akamai Extend Credential period
 This script allows you to extend API credential expiration date more than 2 years(2 years is the limitation from LUNA UI)
 
-How to use
+# How to use
 
 1.Download credential file form LUNA portal
 
