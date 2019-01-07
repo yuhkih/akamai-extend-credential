@@ -6,16 +6,14 @@ This script allows you to extend API credential expiration date more than 2 year
 2.Rename the file to credential.txt
 3.Edit extend_credential.py 
 
-> # -----------------------
-> # Prpare JSON object to set Expiration date
-> # -----------------------
-> #  expiration date formati is like below
-> # "expiresOn": "2018-02-24T22:43:12.000Z",
-> headers = {'Content-Type':'application/json'}
-> data = {
->     "status": "ACTIVE",
->   **"expiresOn": "2032-02-24T22:43:12.000Z",**  <== Edit this portion
->     "description": "Test extention"
-> }
+-----------------------
+"expiresOn": "2018-02-24T22:43:12.000Z",
+headers = {'Content-Type':'application/json'}
+data = {
+     "status": "ACTIVE",
+   **"expiresOn": "2032-02-24T22:43:12.000Z",**  <== Edit this portion
+     "description": "Test extention"
+}
+-----------------------
 
 4.execute "python extend_credential.py"
