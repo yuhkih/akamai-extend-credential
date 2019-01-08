@@ -1,5 +1,11 @@
+# ----------------------------------------------------------
+# Name: extend_credential.py
+# Perpose: Extend expiration date of APLI client
+# 2019/01/08 : yuhki initial release
+# ----------------------------------------------------------
 import requests
 import json
+import os
 from akamai.edgegrid import EdgeGridAuth 
 # from urlparse import urljoin # for Python 2.x
 # from urllib.parse import urljoin # for Python 3.x
@@ -12,24 +18,34 @@ def httpdump():
     print(result.request.headers) # Dump HTTP Request Header
     print(result.request.body) # Dump HTTP Requset body
 
-# -----------------------
-# Open and read a credential file
-# When you download the credntial file from LUNA. The format is like below.
-# -----------------------
 
+# ----------------------------------------
+# Open a credential file
+# It is assumed that you use a credential file dwonloaded from LUNA portal as is.
+# When you download the credntial file from LUNA. The format is like below. (space separated)
 # ------- (These values are dummy) -------
-# When you download a credential file from LUNA. The file format should be like the following
-# Please make sure there are spaces as a sperator
-#
+# Please insert space as a sperator
 # client_secret = 1Ul0WtarfadfgfgafgPo2XRmAsbPbzjw=
 # host = akab-jza67c2hm2atagfasfgsafgurr67wf.luna.akamaiapis.net
 # access_token = akab-ape6fgagfayrafa-532hlfdttj2sxxq6
 # client_token = akab-ruu3utadfasrfdn-elmvfqhpi5l6oezf
+# ----------------------------------------
+
+# Check if a credential file exists
+credential_file = "./credential.txt"
+if os.path.exists(credential_file):
+    file = open('credential.txt','r')
+    lines = file.readlines()
+    file.close
+else:
+    print("[ERROR]Please download a credential file from LUNA and name it credential.txt and place it in the same directory")
+    exit()
 
 file = open('credential.txt','r')
 lines = file.readlines()
 file.close
 
+# Read the credential.txt
 for line in lines:
     if line.find("client_secret") >=0:
        client_secret = line[:-1].split(" ")[2]
@@ -92,8 +108,8 @@ for key in data:
 headers = {'Content-Type':'application/json'}
 data = {
      "status": "ACTIVE",
-     "expiresOn": "2032-02-24T22:43:12.000Z",
-     "description": "John's access to Luna"
+     "expiresOn": "2022-02-24T22:43:12.000Z",
+     "description": "Extend expiresOn time"
 }
 
 
